@@ -11,63 +11,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public class TrendController {
 	@Autowired
-	ServiceTrends serv;
-	/*
-	 * 
-	 * 
-	 */
-	@Autowired 
-	TrendingMedia trend;
-	 
-	
+	ServiceTrends service;
+
+	@Autowired
+	TrendingMedia trending;
+
 	@RequestMapping("/test")
-	public String movie()
-	{
-		return "trendhome";
+	public String movie() {
+		return "home";
 	}
 
 	@RequestMapping("/trending")
-	public String trendingWeek(Model m)
-	{
-		
-		//Model m = null;
-		// TrendingMedia trend = new TrendingMedia();
-			//	ServiceTrends serv = new ServiceTrends();
-				trend= serv.getTrends();
-		 
-		
-		m.addAttribute("trend",trend);
-		//m.addAttribute("trend",tr);
-		
-		return"home";
-		
-		                           		                          
+	public String trendingWeek(Model m) {
+		trending = service.getTrends();
+
+		m.addAttribute("trend", trending);
+
+		return "trendWeek";
+
 	}
+
 	@RequestMapping("/trendingday")
-	public String trendingDay(Model m)
-	{
-		
-		//Model m = null;
-		// TrendingMedia trend = new TrendingMedia();
-			//	ServiceTrends serv = new ServiceTrends();
-				trend= serv.getTrendsDay();
-		 
-		
-		m.addAttribute("trend",trend);
-		//m.addAttribute("trend",tr);
-		
-		return"home";
-		
-		                           		                          
+	public String trendingDay(Model m) {
+
+		trending = service.getTrendsDay();
+
+		m.addAttribute("trend", trending);
+
+		return "trendDay";
+
 	}
+
 	@RequestMapping("/notfound")
 	@ResponseBody
-	public String NotFound()
-	{
-		
-		
-		return"home page not found";
-		
-		                           		                          
+	public String NotFound() {
+
+		return "home page not found";
+
 	}
 }
